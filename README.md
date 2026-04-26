@@ -6,51 +6,7 @@
 
 ## 🏗️ Model Architecture
 
-```
-┌─────────────────────────────────────────────────────────────────────────────────┐
-│                        PostgreSQL — Analytics Layer (dbt)                       │
-│                                                                                 │
-│   Dimension Tables                        Fact Tables                           │
-│   ┌─────────────────┐                    ┌──────────────────────┐               │
-│   │ dim_date        │ ─────────────────► │ fact_attendance      │               │
-│   │ dim_user        │ ─────────────────► │ fact_journey_log     │               │
-│   │ dim_beat        │ ─────────────────► │ fact_pjp             │               │
-│   │ dim_group       │ ─────────────────► │ fact_primary_sales   │               │
-│   │ dim_subgroup    │ ─────────────────► │ fact_primary_indent  │               │
-│   │ dim_l2_table    │ ─────────────────► │ fact_secondary_sales │               │
-│   │ dim_distributor │ ─────────────────► │ fact_sec_indent      │               │
-│   │ dim_division    │ ─────────────────► │ fact_payroll         │               │
-│   │ dim_seller      │ ─────────────────► │ fact_manual_claims   │               │
-│   │ dim_product     │ ─────────────────► │ fact_outstanding     │               │
-│   │ dim_outlet      │ ─────────────────► │ fact_bizom_pri_sales │               │
-│   │ dim_zone_subzone│                    └──────────────────────┘               │
-│   └─────────────────┘                                                           │
-│                                                                                 │
-│   Hierarchy Dimension Tables              Access Control        Measures        │
-│   ┌──────────────────┐  ┌──────────────────┐  ┌────────────────┐  ┌──────────┐ │
-│   │ latest_dd_table  │  │latest_l1l2_table │  │dim_access_table│  │_Measure_ │ │
-│   │ distributor-div  │  │ L1-L2 user       │  │ RLS rules per  │  │ table    │ │
-│   │ mapping · RLS ✓  │  │ hierarchy · RLS ✓│  │ user & level   │  │DAX logic │ │
-│   └──────────────────┘  └──────────────────┘  └────────────────┘  └──────────┘ │
-└─────────────────────────────────────────────────────────────────────────────────┘
-                                    │
-                                    ▼
-┌─────────────────────────────────────────────────────────────────────────────────┐
-│                     Power BI Semantic Model (.pbism)                            │
-│                                                                                 │
-│   ┌──────────────────┐  ┌──────────────────┐  ┌──────────────────────────────┐ │
-│   │  🔒 RLS Rules    │  │  ⚡ Incremental  │  │  📐 DAX Measures             │ │
-│   │  Bizom-synced    │  │  Refresh         │  │  90+ measures across         │ │
-│   │  user access     │  │  Per fact table  │  │  8 business domains          │ │
-│   └──────────────────┘  └──────────────────┘  └──────────────────────────────┘ │
-└─────────────────────────────────────────────────────────────────────────────────┘
-                                    │
-                                    ▼
-┌─────────────────────────────────────────────────────────────────────────────────┐
-│                         Power BI Dashboards                                     │
-│   Sales · Attendance · Journey Compliance · Payroll · Outstanding · PJP        │
-└─────────────────────────────────────────────────────────────────────────────────┘
-```
+![Architecture](assets/semantic_model_architecture.svg)
 
 ---
 
