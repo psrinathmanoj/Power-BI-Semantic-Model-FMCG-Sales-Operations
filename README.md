@@ -6,7 +6,7 @@
 
 ## 🏗️ Model Architecture
 
-![Architecture](assets/semantic_model_architectured.svg)
+![Architecture](assets/semantic_model_architecture.svg)
 
 ---
 
